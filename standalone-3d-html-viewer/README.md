@@ -7,8 +7,8 @@ in a modern desktop browser.
 
 In IngeTrazo, choose **Extensions → Open plugins folder**. Copy this entire
 `standalone-3d-html-viewer` folder into the plugins folder, then restart
-IngeTrazo. Alternatively, copy `__init__.py` there as
-`standalone_3d_html_viewer.py` and restart. The user plugins folder is
+IngeTrazo. Alternatively, copy `standalone-3d-html-viewer.py` directly into
+the plugins folder and restart. The user plugins folder is
 `%APPDATA%\ingetrazo\plugins\` on Windows and
 `~/.local/share/ingetrazo/plugins/` on Linux (honouring `XDG_DATA_HOME`).
 

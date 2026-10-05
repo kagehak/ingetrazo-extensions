@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Export the current IngeTrazo scene as a standalone HTML 3D viewer."""
+"""Standalone 3D HTML viewer extension for IngeTrazo."""
 from __future__ import annotations
 
 import base64

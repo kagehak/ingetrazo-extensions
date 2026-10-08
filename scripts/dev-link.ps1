@@ -9,25 +9,28 @@
       - loose "<name>.py" files, or
       - "<name>\__init__.py" packages.
     It does NOT scan a folder containing "<name>\<name>.py" (the convention
-    used by extensions in this repo, e.g. standalone-3d-html-viewer\).
+    used by extensions in this repo, e.g.
+    extensions\standalone-3d-html-viewer\).
 
-    This script resolves an extension by name under the repo root and
-    creates a symbolic link (falling back to a directory junction, or a hard
-    link for a single file, when symlinks require elevated permissions) so
-    edits made in this repo are picked up the next time IngeTrazo starts.
+    This script resolves an extension by name under this repo's
+    extensions\ folder and creates a symbolic link (falling back to a
+    directory junction, or a hard link for a single file, when symlinks
+    require elevated permissions) so edits made in this repo are picked up
+    the next time IngeTrazo starts.
 
-    Resolution order for -Name <Ext>:
-      1. "<repo>\<Ext>.py"              - a loose single-file extension.
-      2. "<repo>\<Ext>\__init__.py"     - a true package folder; the whole
+    Resolution order for -Name <Ext>, under "<repo>\extensions\":
+      1. "extensions\<Ext>.py"          - a loose single-file extension.
+      2. "extensions\<Ext>\__init__.py" - a true package folder; the whole
                                            folder is linked.
-      3. "<repo>\<Ext>\<Ext>.py"        - this repo's folder convention
+      3. "extensions\<Ext>\<Ext>.py"    - this repo's folder convention
                                            (folder + README.md + same-named
                                            .py); only the inner .py file is
                                            linked, as "<Ext>.py".
 
 .PARAMETER Name
-    The extension to link, matching a file or folder at the repo root
-    (e.g. "standalone-3d-html-viewer"). Required unless -List is used.
+    The extension to link, matching a file or folder under this repo's
+    extensions\ folder (e.g. "standalone-3d-html-viewer"). Required unless
+    -List is used.
 
 .PARAMETER Unlink
     Remove the existing link for -Name from the plugins folder. Only
@@ -97,10 +100,17 @@ function Test-HardLinkToRepo {
     return $false
 }
 
+function Get-ExtensionsDir {
+    param([string]$RepoRoot)
+    return Join-Path $RepoRoot 'extensions'
+}
+
 function Resolve-Extension {
     param([string]$RepoRoot, [string]$ExtName)
 
-    $looseFile = Join-Path $RepoRoot "$ExtName.py"
+    $extensionsDir = Get-ExtensionsDir -RepoRoot $RepoRoot
+
+    $looseFile = Join-Path $extensionsDir "$ExtName.py"
     if (Test-Path -LiteralPath $looseFile -PathType Leaf) {
         return [pscustomobject]@{
             Kind       = 'file'
@@ -109,7 +119,7 @@ function Resolve-Extension {
         }
     }
 
-    $folder = Join-Path $RepoRoot $ExtName
+    $folder = Join-Path $extensionsDir $ExtName
     if (Test-Path -LiteralPath $folder -PathType Container) {
         $initPy = Join-Path $folder '__init__.py'
         if (Test-Path -LiteralPath $initPy -PathType Leaf) {

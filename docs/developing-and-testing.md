@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ## 2. Link your extension into IngeTrazo's plugins folder
 
 Back in this repo, run `scripts\dev-link.ps1` with the extension's name
-(its file or folder name at this repo's root):
+(its file or folder name under this repo's `extensions\` folder):
 
 ```powershell
 cd path\to\ingetrazo-extensions
@@ -54,9 +54,9 @@ scripts\dev-link.ps1 -Name standalone-3d-html-viewer -Unlink
 IngeTrazo only discovers two shapes in its plugins folder: a loose
 `<name>.py` file, or a `<name>\__init__.py` package. `dev-link.ps1`
 understands this repo's folder convention (a folder containing a README.md
-and a same-named `<name>.py`, like `standalone-3d-html-viewer/`) and links
-just the inner `.py` file, so it still shows up correctly as `<name>.py` in
-the plugins folder.
+and a same-named `<name>.py`, like `extensions/standalone-3d-html-viewer/`)
+and links just the inner `.py` file, so it still shows up correctly as
+`<name>.py` in the plugins folder.
 
 ## 3. Launch IngeTrazo and test
 
@@ -73,10 +73,11 @@ too — when in doubt, restart.
 
 ## Conventions for new extensions
 
-- Each extension lives in its own folder or single file at this repo's
-  root, matching the existing `standalone-3d-html-viewer/` convention: a
-  folder named after the extension, containing a same-named `.py` file and
-  a `README.md` describing install/use instructions.
+- Each extension lives in its own folder or single file under this repo's
+  `extensions\` folder, matching the existing
+  `extensions/standalone-3d-html-viewer/` convention: a folder named after
+  the extension, containing a same-named `.py` file and a `README.md`
+  describing install/use instructions.
 - When starting a **new** extension, a reasonable workflow is one
   branch/session per extension, so unrelated extensions don't get tangled
   into the same change set.

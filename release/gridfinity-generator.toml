@@ -1,0 +1,32 @@
+id = "gridfinity-generator"
+version = "1.0"
+author = "kagehak"
+author_url = "https://github.com/kagehak"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/kagehak/ingetrazo-extensions"
+
+# The exact file IngeTrazo users will install: a .py file, or a .zip holding
+# ONE folder with an __init__.py. Use a TAG or a COMMIT in the address, not
+# «main»: what is reviewed must not change afterwards.
+download = "https://raw.githubusercontent.com/kagehak/ingetrazo-extensions/gridfinity-generator-v1.0/extensions/gridfinity-generator/gridfinity-generator.py"
+sha256 = "4249969dd6ba81a9802a0ca264698943acae085c3ad743f52fb0bdbd1e9220e8"
+
+# The IngeTrazo version you tested with.
+ingetrazo = "0.5.7"
+
+# 1 to 4 of: architecture, bim, structures, terrain, drawing, analysis,
+# import-export, rendering, fabrication, productivity, education, other
+tags = ["fabrication", "productivity"]
+
+# Optional: a picture in screenshots/ (png, jpg or webp, under 600 KB, ~1200×750).
+# screenshot = "gridfinity-generator.png"
+
+[name]
+es = "Generador Gridfinity"
+en = "Gridfinity Generator"
+pt = "Gerador Gridfinity"
+
+[summary]
+es = "Genera bins y placas base Gridfinity editables con huellas personalizadas, divisores y esquinas con hueco para los dedos."
+en = "Generate editable Gridfinity bins and baseplates with custom footprints, dividers, and scoop corners."
+pt = "Gera caixas e placas base Gridfinity editáveis com formatos personalizados, divisórias e cantos com recorte para os dedos."

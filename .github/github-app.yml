@@ -18,7 +18,11 @@ scripts:
     command: powershell -NoProfile -Command "Get-ChildItem -Recurse extensions -Filter *.py | ForEach-Object { python -m py_compile $_.FullName }"
     triggers:
       - session.create
+  - name: Run
+    command: powershell -NoProfile -File scripts/run-ingetrazo.ps1
   - name: Link gridfinity-generator
     command: powershell -NoProfile -File scripts/dev-link.ps1 -Name gridfinity-generator
   - name: Link standalone-3d-html-viewer
     command: powershell -NoProfile -File scripts/dev-link.ps1 -Name standalone-3d-html-viewer
+
+auto_open_in_browser: false

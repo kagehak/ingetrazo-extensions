@@ -1,0 +1,24 @@
+instructions: |
+  This repo holds IngeTrazo extension *source* under `extensions/<name>/`.
+  Extensions are Python plugins loaded by a separate IngeTrazo app checkout
+  (https://github.com/kagehak/ingetrazo), not run directly from this repo.
+
+  To test a change, see docs/developing-and-testing.md:
+    1. Clone/set up a local IngeTrazo checkout with its own venv.
+    2. From this repo, run `scripts\dev-link.ps1 -Name <extension>` to
+       symlink the extension into IngeTrazo's `%APPDATA%\ingetrazo\plugins\`.
+    3. Launch IngeTrazo (`python main.py`) and exercise the extension
+       manually from its Extensions menu.
+
+  Prefer one branch/session per extension so unrelated extensions don't get
+  tangled into the same change set.
+
+scripts:
+  - name: Sanity check (compile all extensions)
+    command: powershell -NoProfile -Command "Get-ChildItem -Recurse extensions -Filter *.py | ForEach-Object { python -m py_compile $_.FullName }"
+    triggers:
+      - session.create
+  - name: Link gridfinity-generator
+    command: powershell -NoProfile -File scripts/dev-link.ps1 -Name gridfinity-generator
+  - name: Link standalone-3d-html-viewer
+    command: powershell -NoProfile -File scripts/dev-link.ps1 -Name standalone-3d-html-viewer

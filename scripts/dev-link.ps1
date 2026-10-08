@@ -150,11 +150,13 @@ function Resolve-Extension {
 }
 
 function New-DevLink {
-    param([string]$SourcePath, [string]$LinkPath, [string]$Kind)
+    param([string]$SourcePath, [string]$LinkPath, [string]$Kind, [string]$RepoRoot)
 
     if (Test-Path -LiteralPath $LinkPath) {
         $existing = Get-Item -LiteralPath $LinkPath -Force
-        if (Test-ReparsePoint $existing) {
+        $isLink = Test-ReparsePoint $existing
+        $isHardLink = (-not $isLink) -and (-not $existing.PSIsContainer) -and (Test-HardLinkToRepo $LinkPath $RepoRoot)
+        if ($isLink -or $isHardLink) {
             Remove-Item -LiteralPath $LinkPath -Force -Recurse:($existing.PSIsContainer)
         } else {
             throw ("'$LinkPath' already exists and is not a link created by " +
@@ -295,7 +297,7 @@ if ($Unlink) {
 $ext = Resolve-Extension -RepoRoot $repoRoot -ExtName $Name
 $linkPath = Join-Path $pluginsDir $ext.LinkName
 
-$method = New-DevLink -SourcePath $ext.SourcePath -LinkPath $linkPath -Kind $ext.Kind
+$method = New-DevLink -SourcePath $ext.SourcePath -LinkPath $linkPath -Kind $ext.Kind -RepoRoot $repoRoot
 
 Write-Host "Linked '$Name' ($($ext.Kind)) into $linkPath using a $method."
 Write-Host "Source: $($ext.SourcePath)"

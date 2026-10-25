@@ -1,0 +1,32 @@
+id = "standalone-3d-html-viewer"
+version = "1.0"
+author = "kagehak"
+author_url = "https://github.com/kagehak"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/kagehak/ingetrazo-extensions"
+
+# The exact file IngeTrazo users will install: a .py file, or a .zip holding
+# ONE folder with an __init__.py. Use a TAG or a COMMIT in the address, not
+# «main»: what is reviewed must not change afterwards.
+download = "https://raw.githubusercontent.com/kagehak/ingetrazo-extensions/standalone-3d-html-viewer-v1.0/extensions/standalone-3d-html-viewer/standalone-3d-html-viewer.py"
+sha256 = "a35e3a7fa4f0e9fe3a7fd0d171d243422199b517f884213b98fbc6cdc3007465"
+
+# The IngeTrazo version you tested with.
+ingetrazo = "0.5.7"
+
+# 1 to 4 of: architecture, bim, structures, terrain, drawing, analysis,
+# import-export, rendering, fabrication, productivity, education, other
+tags = ["rendering", "import-export"]
+
+# Optional: a picture in screenshots/ (png, jpg or webp, under 600 KB, ~1200×750).
+# screenshot = "standalone-3d-html-viewer.png"
+
+[name]
+es = "Visor 3D HTML independiente"
+en = "Standalone 3D HTML viewer"
+pt = "Visualizador 3D HTML independente"
+
+[summary]
+es = "Exporta la escena como un único archivo HTML compartible con un visor 3D interactivo basado en Three.js."
+en = "Export the scene as a single shareable HTML file with an interactive Three.js 3D viewer."
+pt = "Exporta a cena como um único arquivo HTML compartilhável com um visualizador 3D interativo baseado em Three.js."
